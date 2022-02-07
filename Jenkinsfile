@@ -25,23 +25,23 @@ pipeline {
         //             sh "./mvnw test"
         //     }
         // }
-        // stage('Sonarqube Analysis') {
-        //     environment {
-        //       def scannerHome = tool 'SonarQubeScanner'
-        //     }
-        //     steps {  
-        //         withSonarQubeEnv('sonarserver') {
-        //             sh "/opt/sonar/bin/sonar-scanner"
-        //         }
-        //         sleep time: 30000, unit: 'MILLISECONDS'
-        //         script {
-        //                 def qg = waitForQualityGate()
-        //                 if (qg.status != 'OK') {
-        //                     error "Pipeline aborted due to quality gate failure: ${qg.status}"
-        //                 }
-        //         }
-        //     }
-        // }
+        stage('Sonarqube Analysis') {
+            environment {
+              def scannerHome = tool 'SonarQubeScanner'
+            }
+            steps {  
+                withSonarQubeEnv('sonarserver') {
+                    sh "/opt/sonar/bin/sonar-scanner"
+                }
+                sleep time: 30000, unit: 'MILLISECONDS'
+                script {
+                        def qg = waitForQualityGate()
+                        if (qg.status != 'OK') {
+                            error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                        }
+                }
+            }
+        }
         stage("Upload Artifacts"){
             steps{
                 rtUpload (
@@ -62,7 +62,7 @@ pipeline {
             steps{
                 echo "Running Deployment on Dev"
                 sh """
-                sshpass -p 'Venkat@123' scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no target/*.war cloud_user@172.31.46.115:/opt/tomcat/webapps
+                  sshpass -p 'Venkat@123' scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no target/*.war cloud_user@172.31.46.115:/opt/tomcat/webapps
                 """
             }
         }  
