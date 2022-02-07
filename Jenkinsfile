@@ -17,7 +17,7 @@ pipeline {
             steps {
                     //sh "./mvnw package"
                     sh "./mvnw package"
-                    sh "mv target/petclinic*.war target/petclinicApp-${BUILD_NUMBER}.jar"
+                    sh "mv target/petclinic*.war target/petclinicApp-${BUILD_NUMBER}.war"
             }
         }
         // stage("Run Unit-Tests"){
@@ -49,7 +49,7 @@ pipeline {
                     spec: '''{
                         "files": [
                             {
-                            "pattern": "target/*.jar",
+                            "pattern": "target/*.war",
                             "target": "dummyrepo/petclinicApp/"
                             }
                         ]
