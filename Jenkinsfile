@@ -62,7 +62,7 @@ pipeline {
             steps{
                 echo "Running Deployment on Dev"
                 sh """
-                sshpass -p 'Venkat@123' scp target/*.war cloud_user@172.31.46.115:/opt/tomcat/webapps
+                sshpass -p 'Venkat@123' scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no target/*.war cloud_user@172.31.46.115:/opt/tomcat/webapps
                 """
             }
         }  
