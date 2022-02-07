@@ -61,6 +61,9 @@ pipeline {
         stage("Deploy - DEV"){
             steps{
                 echo "Running Deployment on Dev"
+                sh """
+                sshpass -p 'Venkat@123' scp target/*.war cloud_user@172.31.46.115:/opt/tomcat/webapps
+                """
             }
         }  
         stage("Deploy - UAT"){
