@@ -15,7 +15,7 @@ pipeline {
             steps{
                 //clean before run 
                 cleanws()
-                sh"${scannerHome}/bin/sonar-scanner"
+                sh "${scannerHome}/bin/sonar-scanner"
             }
              
            
