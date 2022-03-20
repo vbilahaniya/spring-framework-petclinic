@@ -13,10 +13,10 @@ pipeline {
         }
           stage("codeAnalysis"){
             environment {
-              def sonarHome = tool name: 'SonarScanner'
+              def sonarHome = tool name: 'SonarQube Scanner 2.4'
             }
             steps {  
-                withSonarQubeEnv('sonarQubeServer') {
+                withSonarQubeEnv('SonarScanner') {
                     sh "${sonarHome}/opt/sonar-scanner"
                 }
                 sleep time: 30000, unit: 'MILLISECONDS'
