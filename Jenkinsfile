@@ -13,7 +13,7 @@ pipeline {
         }
           stage("codeAnalysis"){
             environment {
-              def sonarHome = tool name: 'sonarqube-scanner'
+              def sonarHome = tool name: 'SonarQube-Scanner 2.4'
             }
             steps {  
                 withSonarQubeEnv('SonarScanner') {
