@@ -17,7 +17,7 @@ pipeline {
             }
             steps {  
                 withSonarQubeEnv('sonarQubeServer') {
-                    sh "${sonarHome}/bin/sonar-scanner"
+                    sh "${sonarHome}/opt/sonar-scanner"
                 }
                 sleep time: 30000, unit: 'MILLISECONDS'
                 script {
